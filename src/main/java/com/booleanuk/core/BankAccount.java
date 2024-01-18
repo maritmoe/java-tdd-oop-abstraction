@@ -7,7 +7,11 @@ public class BankAccount {
     String branchCode;
     String accountNumber;
 
+    public BankAccount(double balance) {
+        this.setBalance(balance);
+    }
     public BankAccount(String accountHolderName) {
+
         this.accountHolderName = accountHolderName;
     }
 
@@ -36,7 +40,10 @@ public class BankAccount {
         this.balance = (int)(balance * 100);
     }
 
-    public void depositAmount(double deposit) {
+    public void depositAmount(double deposit) throws NegativeBalanceException {
+        if (deposit < 0.0) {
+            throw new NegativeBalanceException();
+        }
         double newBalance = this.getBalance() + deposit;
         this.setBalance(newBalance);
     }
